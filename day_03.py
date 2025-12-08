@@ -44,25 +44,23 @@ def get_part_two(puzzle_data):
     for row in puzzle_data:
         arr = np.array([int(c) for c in str(row)])
 
-        size = len(arr)
-        max_num = arr[-12:]
-        max_val = 0
+        start_idx = 0
+        num = ""
+        for i in range(12, 0, -1):
+            for j in range(9, 0, -1):
+                success = False
+                for k in range(0, len(arr) - i - start_idx +1, 1):
+                    if arr[k+start_idx] == j:
+                        num += str(j)
+                        start_idx = start_idx + k +1
+                        # print(num)
+                        success = True
+                        break
+                if success:
+                    break
 
-        for i in range(size - 12, 0, -1):
-            nums_to_compare = []
-            for j in range(0, 12, 1):
-                new_number = np.append(np.append(max_num[:j], arr[i-1]),  max_num[j:])[:12]
-                nums_to_compare.append(int("".join(map(str, new_number))))
-                tmp = max_num.copy() #[j] = arr[i-1]
-                tmp[j] = arr[i-1]
-                nums_to_compare.append(int("".join(map(str, tmp))))
-
-            max_val = max(nums_to_compare)
-            max_num = np.array([int(c) for c in str(max_val)])
-
-
-        print(max_val)
-        sum += max_val
+        print(num)
+        sum+=int(num)
 
     print("Sum " + str(sum))
 
@@ -73,6 +71,8 @@ get_part_one(prepared_puzzle)
 print("Part two example:")
 get_part_two(prepared_puzzle)
 
-# prepared_puzzle = prepare_puzzle("puzzles/day_03.txt")
-# print("Part one:")
-# get_part_one(prepared_puzzle)
+prepared_puzzle = prepare_puzzle("puzzles/day_03.txt")
+print("Part one:")
+get_part_one(prepared_puzzle)
+print("Part two:")
+get_part_two(prepared_puzzle)
