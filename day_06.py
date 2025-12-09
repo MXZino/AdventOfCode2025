@@ -1,6 +1,3 @@
-import numpy as np
-
-
 def prepare_puzzle(data: str):
     file = open(data, "r")
     content = file.read()
