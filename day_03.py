@@ -1,6 +1,5 @@
 import pandas as pd
 import numpy as np
-from numpy.ma.core import max_val
 
 
 def prepare_puzzle(data: str):
